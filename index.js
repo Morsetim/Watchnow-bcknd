@@ -6,9 +6,10 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const movieRoute = require("./routes/movies");
 const listRoute = require("./routes/lists");
-const bodyParser = require('body-parser');
 const sslRedirect = require('heroku-ssl-redirect').default
 const cors = require("cors");
+const bodyParser = require("body-parser")
+
 
 dotenv.config();
 
