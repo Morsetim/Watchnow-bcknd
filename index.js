@@ -7,6 +7,7 @@ const userRoute = require("./routes/users");
 const movieRoute = require("./routes/movies");
 const listRoute = require("./routes/lists");
 const bodyParser = require('body-parser');
+const sslRedirect = require('heroku-ssl-redirect');
 const cors = require("cors");
 
 dotenv.config();
@@ -19,6 +20,7 @@ mongoose.connect(process.env.MONGO_URL, {
   .catch(err=>console.log(err));
 
 app.use(cors())
+app.use(sslRedirect());
 app.use(bodyParser.json());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true}));
