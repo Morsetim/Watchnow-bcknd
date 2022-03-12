@@ -9,8 +9,6 @@ const listRoute = require("./routes/lists");
 const bodyParser = require('body-parser');
 const cors = require("cors");
 
-
-
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URL, {
@@ -35,7 +33,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/movies", movieRoute);
 app.use("/api/lists", listRoute);
-
 
 
 app.listen(process.env.PORT || 8800, () => {
