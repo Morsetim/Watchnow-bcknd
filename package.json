@@ -5,15 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "client": "npm run start --prefix client",
-    "build": "concurrently --kill-others-on-fail \"npm run start\" \"npm run client\""
+    "client": "npm run start --prefix client"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "concurrently": "^7.0.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.0.0",
     "dotenv": "^16.0.0",
