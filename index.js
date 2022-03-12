@@ -25,6 +25,12 @@ app.use(bodyParser.json());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true}));
 
+app.get('/', (req, res) =>{
+  res.send({
+      message: "Welcome to Watchnow App"
+  });
+})
+
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/movies", movieRoute);
