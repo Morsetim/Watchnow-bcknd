@@ -6,7 +6,7 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const movieRoute = require("./routes/movies");
 const listRoute = require("./routes/lists");
-const sslRedirect = require('heroku-ssl-redirect').default
+
 const cors = require("cors");
 const bodyParser = require("body-parser")
 
@@ -21,7 +21,6 @@ mongoose.connect(process.env.MONGO_URL, {
   .catch(err=>console.log(err));
 
 app.use(cors())
-app.use(sslRedirect());
 app.use(bodyParser.json());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true}));
