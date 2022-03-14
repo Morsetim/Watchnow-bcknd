@@ -10,6 +10,11 @@ const listRoute = require("./routes/lists");
 const cors = require("cors");
 const bodyParser = require("body-parser")
 
+const corsOptions ={
+  origin:'*', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+}
 
 dotenv.config();
 
@@ -20,7 +25,7 @@ mongoose.connect(process.env.MONGO_URL, {
 .then(()=>console.log("DB Connection Successful"))
   .catch(err=>console.log(err));
 
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(bodyParser.json());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true}));
