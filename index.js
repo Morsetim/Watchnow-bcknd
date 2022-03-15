@@ -17,7 +17,7 @@ const corsOptions ={
 }
 
 dotenv.config();
-app.use(cors())
+app.use(cors(corsOptions))
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true, 
