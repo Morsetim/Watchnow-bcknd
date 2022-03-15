@@ -17,6 +17,7 @@ const corsOptions ={
 }
 
 dotenv.config();
+app.use(cors())
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true, 
@@ -34,7 +35,6 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-app.use(cors(corsOptions))
 app.use(bodyParser.json());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true}));
