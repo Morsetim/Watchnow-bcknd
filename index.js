@@ -26,7 +26,7 @@ mongoose.connect(process.env.MONGO_URL, {
 .then(()=>console.log("DB Connection Successful"))
   .catch(err=>console.log(err));
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://watchnowapp.herokuapp.com/api/');
+  res.setHeader('Access-Control-Allow-Origin', 'https://watchnowapp.netlify.app');
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
   // Request headers you wish to allow
