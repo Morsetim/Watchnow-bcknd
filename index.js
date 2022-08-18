@@ -10,14 +10,14 @@ const listRoute = require("./routes/lists");
 const cors = require("cors");
 const bodyParser = require("body-parser")
 
-const corsOptions ={
-  origin:'*', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200,
-}
+// const corsOptions ={
+//   origin:'*', 
+//   credentials:true,            //access-control-allow-credentials:true
+//   optionSuccessStatus:200,
+// }
 
 dotenv.config();
-app.use(cors(corsOptions));
+app.use(cors());
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true, 
@@ -26,6 +26,11 @@ mongoose.connect(process.env.MONGO_URL, {
 .then(()=>console.log("DB Connection Successful"))
   .catch(err=>console.log(err));
 
+  app.use(function (req, res, next) { 
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    next();
+  })
 // app.use(function (req, res, next) {
 //   res.setHeader('Access-Control-Allow-Origin', '*');
 //   // Request methods you wish to allow
