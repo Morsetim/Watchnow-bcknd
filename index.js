@@ -11,7 +11,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser")
 
 dotenv.config();
-app.use(cors());
+app.use(cors({ origin: true }));
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true, 
