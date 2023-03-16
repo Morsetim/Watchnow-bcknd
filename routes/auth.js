@@ -5,15 +5,22 @@ const jwt = require("jsonwebtoken");
 
 //REGISTER
 router.post("/register", async (req, res) => {
+  // User.findOne({ email: req.body.email }, function(err, user) {
+  //   if(err) {
+  //     res.status(401).json("User Alreadt exist");
+  //      //handle error here
+  //   }
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,
     password: CryptoJS.AES.encrypt(
       req.body.password,
       process.env.SECRET_KEY
-    ).toString()
+    ).toString(),
   });
   try {
+    const email = await User.findOne({ email: req.body.email });
+    email && res.status(401).json("Email Already exist");
     const user = await newUser.save();
     res.status(201).json(user);
   } catch (err) {
@@ -25,13 +32,13 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(401).json("Wrong password or username!");
+    !user && res.status(401).json("Wrong password or username");
 
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
     const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
 
     originalPassword !== req.body.password &&
-      res.status(401).json("Wrong password or username!");
+      res.status(401).json("Wrong password or username...");
 
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
@@ -46,6 +53,5 @@ router.post("/login", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 module.exports = router;
