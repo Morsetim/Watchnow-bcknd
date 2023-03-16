@@ -20,7 +20,7 @@ router.post("/register", async (req, res) => {
   });
   try {
     const email = await User.findOne({ email: req.body.email });
-    email && res.status(401).json("Email Already exist");
+    email && res.status(401).json({message:"Email Already exist", status: 401});
     const user = await newUser.save();
     res.status(201).json(user);
   } catch (err) {
@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(401).json({message:"Wrong password or username", status: 401});
+    !user && res.status(401).json("Wrong password or username");
 
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
     const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
